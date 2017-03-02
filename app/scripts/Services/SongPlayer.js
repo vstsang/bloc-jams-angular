@@ -1,7 +1,16 @@
 (function() {
+/**
+* @service SongPlayer
+* @desc Private function setSong & playSong for use by public method SongPlayer.play & SongPlayer.pause
+* @return {Object} SongPlayer objects with methods and attributes
+*/
 	function SongPlayer() {
 		var SongPlayer = {};
-		
+
+/**
+* @desc Current song object file 
+* @type {Object}
+*/
 		var currentSong = null;
 		
 /**
@@ -27,20 +36,39 @@
 			});
 
 			currentSong = song;
-		};		
+		};	
+
+/**
+* @function playSong
+* @desc Plays currentSong and set playing property to true 
+* @param {Object} song
+*/
+		var playSong = function(song) {
+			currentBuzzObject.play();
+			song.playing = true;
+		}
 		
+/**
+* @method SongPlayer.play
+* @desc Either plays new song or plays paused song
+* @param {Object} song
+*/
 		SongPlayer.play = function(song) {
 			if (currentSong !== song) {
 				setSong(song);
-				currentBuzzObject.play();
-				song.playing = true;
+				playSong(song);
 			} else if (currentSong === song) {
 				if (currentBuzzObject.isPaused()) {
-					currentBuzzObject.play();
+					playSong(song);
 				}
 			}  
 		};
-		
+	
+/**
+* @method SongPlayer.pause
+* @desc Pauses the song and set playing attribute to false
+* @param {Object} song
+*/
 		SongPlayer.pause = function(song) {
      		currentBuzzObject.pause();
      		song.playing = false;

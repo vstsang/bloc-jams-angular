@@ -6,7 +6,7 @@
 */
 	function SongPlayer(Fixtures) {
 
-		/**
+/**
 * @desc Initialise the SongPlayer object that will contain the public methods
 * @type {Object}
 */		
@@ -31,8 +31,7 @@
 */
 		var setSong = function(song) {
 			if (currentBuzzObject) {
-				currentBuzzObject.stop();
-				SongPlayer.currentSong.playing = null;
+				stopSong(song);
 			}
 
 			currentBuzzObject = new buzz.sound(song.audioUrl, {
@@ -54,6 +53,16 @@
 		}
 
 /**
+* @function stopSong
+* @desc Stops currentSong and set playing property to null 
+* @param {Object} song
+*/		
+		var stopSong = function(song) {
+			currentBuzzObject.stop();
+			SongPlayer.currentSong.playing = null;
+		}		
+		
+/**
 * @function getSongIndex
 * @desc Gets the index of song
 * @param {Object} song
@@ -61,7 +70,7 @@
 */		
 		var getSongIndex = function(song) {
 			return currentAlbum.songs.indexOf(song);
-		};
+		};		
 		
 /**
 * @desc Active song object from list of songs
@@ -106,8 +115,24 @@
 			currentSongIndex--;
 			
  			if (currentSongIndex < 0) {
-         		currentBuzzObject.stop();
-         		SongPlayer.currentSong.playing = null;
+				stopSong(song);
+			} else {
+			 	var song = currentAlbum.songs[currentSongIndex];
+			 	setSong(song);
+			 	playSong(song);
+			}     					
+		};
+		
+/**
+* @function SongPlayer.next
+* @desc Plays the next song
+*/		
+		SongPlayer.next = function() {
+			var currentSongIndex = getSongIndex(SongPlayer.currentSong);
+			currentSongIndex++;
+			
+ 			if (currentSongIndex >= currentAlbum.songs.length) {
+				stopSong(song);
 			} else {
 			 	var song = currentAlbum.songs[currentSongIndex];
 			 	setSong(song);

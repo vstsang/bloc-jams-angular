@@ -94,7 +94,7 @@
 * @desc Current volume of currently playing song, set initial volume to 20
 * @type {Number}
 */		
-		SongPlayer.volume = null;
+		SongPlayer.volume = 20;
 		
 /**
 * @function SongPlayer.play
@@ -176,7 +176,6 @@
 */		
 		SongPlayer.setVolume = function(volume) {
 			if (currentBuzzObject) {
-				console.log("volume: " + volume);
 				currentBuzzObject.setVolume(volume);
 			}
 		};

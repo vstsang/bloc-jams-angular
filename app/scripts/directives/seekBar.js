@@ -26,7 +26,9 @@
 			templateUrl: '/templates/directives/seek_bar.html',
 			replace: true,
 			restrict: 'E',
-			scope: { },
+			scope: { 
+				onChange: '&'
+			},
 			
 /**
 * @function directive link function
@@ -38,6 +40,19 @@
 				scope.max = 100;
 
 				var seekBar = $(element);
+				
+/**
+* @desc Updates the scope attribute values with 
+*       user selected HTML value VIEW to CONTROl update
+* @type {Number}
+*/
+				attributes.$observe('value', function(newValue) {
+     				scope.value = newValue;
+ 				});
+ 
+ 				attributes.$observe('max', function(newValue) {
+     				scope.max = newValue;
+ 				});
 
 /**
 * @function percentString
@@ -77,6 +92,7 @@
 				scope.onClickSeekBar = function(event) {
 					var percent = calculatePercent(seekBar, event);
 					scope.value = percent * scope.max;
+					notifyOnChange(scope.value);
 				};
 
 /**
@@ -88,8 +104,20 @@
 						var percent = calculatePercent(seekBar, event);
 						scope.$apply(function() {
 							scope.value = percent * scope.max;
+							notifyOnChange(scope.value);
 						});
 					});
+
+/**
+* @function notifyOnChange
+* @desc Notify onChange directive the scope value has changed, 
+*       CONTROL to VIEW update, using scope.value to update the thumb
+* @param {Number} newValue
+*/
+				var notifyOnChange = function(newValue) {
+					if (typeof scope.onChange === 'function')
+						scope.onChange({value: newValue});
+				};	
 
 					$document.bind('mouseup.thumb', function() {
 						$document.unbind('mousemove.thumb');

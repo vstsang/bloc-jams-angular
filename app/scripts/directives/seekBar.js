@@ -43,7 +43,7 @@
 				
 /**
 * @desc Updates the scope attribute values with 
-*       user selected HTML value VIEW to CONTROl update
+*       user selected HTML value VIEW to MODEL update
 * @type {Number}
 */
 				attributes.$observe('value', function(newValue) {
@@ -86,7 +86,7 @@
 
 /**
 * @function onClickSeekBar
-* desc Updats the mouse click point value
+* desc Updates the mouse click point value
 * @param {Object} event
 */				
 				scope.onClickSeekBar = function(event) {
@@ -97,7 +97,7 @@
 
 /**
 * @function trackThumb
-* desc Tracks the mouse click point on seekBar
+* desc Tracks the mouse drag point on seekBar
 */				
 				scope.trackThumb = function() {
 					$document.bind('mousemove.thumb', function(event) {
@@ -117,7 +117,7 @@
 /**
 * @function notifyOnChange
 * @desc Notify onChange directive the scope value has changed, 
-*       CONTROL to VIEW update, using scope.value to update the thumb
+*       MODEL to VIEW update, using scope.value to update the thumb
 * @param {Number} newValue
 */
 				var notifyOnChange = function(newValue) {

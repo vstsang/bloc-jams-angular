@@ -36,7 +36,6 @@
 
 			currentBuzzObject = new buzz.sound(song.audioUrl, {
 				formats: ['mp3'],
-				autoplay: true,
 				preload: true
 			});
 			
@@ -208,6 +207,16 @@
 			} else {
 				SongPlayer.muteIcon = false;
 			}
+		};
+
+/**
+* @function autoplayNextSong
+* @desc When the seekBar value changes, autoplay next song
+*/		
+		SongPlayer.autoplayNextSong = function() {
+			if (currentBuzzObject.isEnded()) {
+				SongPlayer.next();
+			}		
 		};
 		
 		return SongPlayer;

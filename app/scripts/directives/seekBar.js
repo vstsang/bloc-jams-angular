@@ -5,7 +5,7 @@
 * @param {Object} $document Inject as a dependency
 * @return {Object} Directive Definition Object
 */	
- 	function seekBar($document) {
+ 	function seekBar($document, SongPlayer) {
 
 /**
 * @function calculatePercent
@@ -43,11 +43,13 @@
 				
 /**
 * @desc Updates the scope attribute values with 
-*       user selected HTML value VIEW to MODEL update
+*       user selected HTML value VIEW to MODEL update,
+* 		also autoplay next song if reach end of song
 * @type {Number}
 */
 				attributes.$observe('value', function(newValue) {
      				scope.value = newValue;
+					SongPlayer.autoplayNextSong();
  				});
  
  				attributes.$observe('max', function(newValue) {
@@ -130,5 +132,5 @@
 	}
  	angular
 		.module('blocJams')
-		.directive('seekBar', ['$document', seekBar]);
+		.directive('seekBar', ['$document', 'SongPlayer', seekBar]);
 })();

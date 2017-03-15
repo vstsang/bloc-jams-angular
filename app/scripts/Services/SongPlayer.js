@@ -36,6 +36,7 @@
 
 			currentBuzzObject = new buzz.sound(song.audioUrl, {
 				formats: ['mp3'],
+				autoplay: true,
 				preload: true
 			});
 			
@@ -77,6 +78,12 @@
 		var getSongIndex = function(song) {
 			return currentAlbum.songs.indexOf(song);
 		};		
+
+		var autoPlayNextSong = function(song) {
+			if (currentBuzzObject.isEnded) {
+				SongPlayer.next();
+			}
+		}
 		
 /**
 * @desc Active song object from list of songs
@@ -97,6 +104,12 @@
 		SongPlayer.volume = 20;
 		
 /**
+* @desc Status of mute, used to show/hide mute icon
+* @type {Boolean}
+*/		
+		SongPlayer.muteIcon = null;
+		
+/**
 * @function SongPlayer.play
 * @desc Either plays new song or plays paused song
 * @param {Object} song
@@ -111,6 +124,7 @@
 					playSong(song);
 				}
 			}
+			//autoPlayNextSong();
 		};
 	
 /**
@@ -177,6 +191,22 @@
 		SongPlayer.setVolume = function(volume) {
 			if (currentBuzzObject) {
 				currentBuzzObject.setVolume(volume);
+			}
+		};
+		
+/**
+* @function toggleMute
+* @desc Mute and unmute
+*/		
+		SongPlayer.toggleMute = function() {
+			if (currentBuzzObject) {
+				currentBuzzObject.toggleMute();
+			}
+			
+			if (currentBuzzObject.isMuted()) {
+				SongPlayer.muteIcon = true;
+			} else {
+				SongPlayer.muteIcon = false;
 			}
 		};
 		

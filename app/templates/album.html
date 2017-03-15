@@ -4,8 +4,14 @@
             <img src="{{ album.albumData.albumArtUrl }}" class="album-cover-art">
         </div>
         <div class="album-view-details column half">
-            <h2 class="album-view-title">{{ album.albumData.title }}</h2>
-            <h3 class="album-view-artist">{{ album.albumData.artist }}</h3>
+            <h2 class="album-view-title">{{ album.albumData.title }}
+				<span class="ion-ios-star" ng-show="album.albumData.titleRated" ng-click="album.albumData.titleRated = false"></span>
+				<span class="ion-ios-star-outline" ng-hide="album.albumData.titleRated" ng-click="album.albumData.titleRated = true"></span>
+			</h2>
+            <h3 class="album-view-artist">{{ album.albumData.artist }}
+				<span class="ion-ios-star" ng-show="album.albumData.artistRated" ng-click="album.albumData.artistRated = false"></span>
+				<span class="ion-ios-star-outline" ng-hide="album.albumData.artistRated" ng-click="album.albumData.artistRated = true"></span>
+			</h3>
             <h5 class="album-view-release-info">{{ album.albumData.year + " " + album.albumData.label}}</h5>
         </div>
     </section>
@@ -18,6 +24,8 @@
 			 </td>
 			<td class="song-item-title">{{ song.title }}</td>
             <td class="song-item-duration">{{ song.duration | timecode }}</td>
+			<td class="icon ion-ios-star" ng-show="song.rated" ng-click="song.rated = false"></td>
+			<td class="icon ion-ios-star-outline" ng-hide="song.rated" ng-click="song.rated = true"></td>
         </tr>
     </table>
 </main>

@@ -33,17 +33,18 @@
 
 	<table class="album-view-song-list">
 		<tr>
-			<td><h3>Playlist</h3></td>
-            <td><a class="play-pause">
-            	<span class="ion-play" 
-					  ng-show="!playerBar.songPlayer.currentSong.playing" 
-					  ng-click="playerBar.songPlayer.play()">
-				</span>
-				<span class="ion-pause"
-					  ng-show="playerBar.songPlayer.currentSong.playing"
-					  ng-click="playerBar.songPlayer.pause()"
-				</span>
-			</a></td>
+			<td><h3>Playlist</h3>
+				<a class="play-pause">
+					<span class="ion-play" 
+						  ng-show="!songPlayer.currentSong.playing" 
+						  ng-click="songPlayer.song.play()">
+					</span>
+					<span class="ion-pause"
+						  ng-show="songPlayer.currentSong.playing"
+						  ng-click="songPlayer.song.pause()">
+					</span>
+				</a>
+			</td>
 		</tr>
 		<tr class="album-view-song-item" ng-mouseover="hovered = true" ng-mouseleave="hovered = false" ng-repeat="song in album.albumData.songs | filter:true:song.checked">
 			<td class="song-item-number">

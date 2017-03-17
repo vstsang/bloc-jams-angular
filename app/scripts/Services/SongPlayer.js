@@ -119,8 +119,10 @@
 				setSong(song);
 				playSong(song);
 			} else if (SongPlayer.currentSong === song) {
-				if (currentBuzzObject.isPaused()) {
-					playSong(song);
+				if (currentBuzzObject) {
+					if (currentBuzzObject.isPaused()) {
+						playSong(song);
+					}
 				}
 			}
 		};
@@ -227,9 +229,8 @@
 */
 		SongPlayer.addPlaylist = function(song) {
 			song.checked = true;
-			//SongPlayer.playlistArray.push(this);
-			console.log("add checked: " + song.checked);
-			//console.log("add array: " + SongPlayer.playlistArray);
+			SongPlayer.playlistArray.push(song);
+			console.log("add array: " + SongPlayer.playlistArray);
 		};
 
 /**
@@ -239,13 +240,10 @@
 */
 		SongPlayer.removePlaylist = function(song) {
 			song.checked = false;
-			//SongPlayer.playlistArray.splice(SongPlayer.playlistArray.indexOf(this), 1);
-			//console.log("remove index: " + SongPlayer.playlistArray.indexOf(this));
-			console.log("remove checked: " + song.checked);
-			//console.log("remove array: " + SongPlayer.playlistArray);
+			SongPlayer.playlistArray.splice(SongPlayer.playlistArray.indexOf(song), 1);
+			console.log("remove array: " + SongPlayer.playlistArray);
 		};
 		
-	
 		return SongPlayer;
 	}
 	

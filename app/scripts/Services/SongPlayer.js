@@ -77,12 +77,6 @@
 		var getSongIndex = function(song) {
 			return currentAlbum.songs.indexOf(song);
 		};		
-
-		var autoPlayNextSong = function(song) {
-			if (currentBuzzObject.isEnded) {
-				SongPlayer.next();
-			}
-		}
 		
 /**
 * @desc Active song object from list of songs
@@ -107,7 +101,13 @@
 * @type {Boolean}
 */		
 		SongPlayer.muteIcon = null;
-		
+
+/**
+* @desc Custom playlist array
+* @type {Array}
+*/		
+		SongPlayer.playlistArray = [];
+			
 /**
 * @function SongPlayer.play
 * @desc Either plays new song or plays paused song
@@ -123,7 +123,6 @@
 					playSong(song);
 				}
 			}
-			//autoPlayNextSong();
 		};
 	
 /**
@@ -214,11 +213,39 @@
 * @desc When the seekBar value changes, autoplay next song
 */		
 		SongPlayer.autoplayNextSong = function() {
-			if (currentBuzzObject.isEnded()) {
-				SongPlayer.next();
-			}		
+			if (currentBuzzObject) {
+				if (currentBuzzObject.isEnded()) {
+					SongPlayer.next();
+				}		
+			}
+		};
+				
+/**
+* @function addPlaylist
+* @desc Add song to custom playlist
+* @param {Object} song
+*/
+		SongPlayer.addPlaylist = function(song) {
+			song.checked = true;
+			//SongPlayer.playlistArray.push(this);
+			console.log("add checked: " + song.checked);
+			//console.log("add array: " + SongPlayer.playlistArray);
+		};
+
+/**
+* @function removePlaylist
+* @desc Remove song to custom playlist
+* @param {Object} song
+*/
+		SongPlayer.removePlaylist = function(song) {
+			song.checked = false;
+			//SongPlayer.playlistArray.splice(SongPlayer.playlistArray.indexOf(this), 1);
+			//console.log("remove index: " + SongPlayer.playlistArray.indexOf(this));
+			console.log("remove checked: " + song.checked);
+			//console.log("remove array: " + SongPlayer.playlistArray);
 		};
 		
+	
 		return SongPlayer;
 	}
 	
